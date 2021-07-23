@@ -1,8 +1,7 @@
-package company;
 
 // 2021-07-18(일)
 // 코딩테스트 연습 > 2021 KAKAO BLIND RECRUITMENT > 신규 아이디 추천
-public class kakao_03 {
+public class kakao_NewIdSuggest {
 
     public static void main(String[] args) {
         String[] newIdArr = {"...!@BaT#*..y.abcdefghijklm", "z-+.^.", "=.=", "123_.def", "abcdefghijklmn.p"};
