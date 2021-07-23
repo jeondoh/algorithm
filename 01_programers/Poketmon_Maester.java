@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 // 2021-07-25(일)
 // 코딩테스트 연습 > 찾아라 프로그래밍 마에스터 > 폰켓몬
-public class Maester_Poketmon {
+public class Poketmon_Maester {
 
     public static void main(String[] args) {
         int[] nums = {3, 1, 2, 3};
