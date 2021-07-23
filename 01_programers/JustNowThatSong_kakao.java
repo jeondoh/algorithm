@@ -3,7 +3,7 @@ import java.util.Date;
 
 // 2021-07-04(일)
 // 코딩테스트 연습 > 2018 KAKAO BLIND RECRUITMENT > [3차] 방금그곡
-public class kakao_JustNowThatSong {
+public class JustNowThatSong_kakao {
     // String : 문자열 연산이 적고 멀티쓰레드 환경일 경우
     // StringBuffer : 문자열 연산이 많고 멀티쓰레드 환경일 경우
     // StringBuilder : 문자열 연산이 많고 단일쓰레드이거나 동기화를 고려하지 않아도 되는 경우 > buffer보다 좀 더 빠름
