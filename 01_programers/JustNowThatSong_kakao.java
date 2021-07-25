@@ -13,13 +13,16 @@ public class JustNowThatSong_kakao {
         String m1 = "ABCDEFG";
         String m2 = "CC#BCC#BCC#BCC#B";
         String m3 = "ABC";
+        String m4 = "ABC";
         String[] musicinfos1 = {"12:00,12:14,HELLO,CDEFGAB", "13:00,13:05,WORLD,ABCDEF"};
         String[] musicinfos2 = {"03:00,03:30,FOO,CC#B", "04:00,04:08,BAR,CC#BCC#BCC#B"};
         String[] musicinfos3 = {"12:00,12:14,HELLO,C#DEFGAB", "13:00,13:05,WORLD,ABCDEF"};
+        String[] musicinfos4 = {"12:00,12:14,HELLO,CDEFGAB", "13:00,13:14,WORLD,ABCDEF"};
 
         System.out.println(solution(m1, musicinfos1));
         System.out.println(solution(m2, musicinfos2));
         System.out.println(solution(m3, musicinfos3));
+        System.out.println(solution(m4, musicinfos4));
     }
 
     public static String solution(String melody, String[] musicinfos) {
@@ -41,14 +44,9 @@ public class JustNowThatSong_kakao {
             if(chk>=0){
                 // 조건이 일치하는 음악이 여러 개일 때에는 라디오에서 재생된 시간이 제일 긴 음악 제목을 반환한다.
                 // 재생된 시간도 같을 경우 먼저 입력된 음악 제목을 반환한다.
-                if(result.equals(answer)){
+                if(time > timeCompare){
                     timeCompare = time;
                     result = data[2];
-                }else{
-                    if(time > timeCompare){
-                        timeCompare = time;
-                        result = data[2];
-                    }
                 }
             }
         }
