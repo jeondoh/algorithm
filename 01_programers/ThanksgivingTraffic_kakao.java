@@ -1,8 +1,5 @@
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
 
 // 2021-08-22(일)
 // 코딩테스트 연습 > 2018 KAKAO BLIND RECRUITMENT > [1차] 추석 트래픽
@@ -32,9 +29,9 @@ public class ThanksgivingTraffic_kakao {
                 "2016-09-15 21:00:00.966 0.381s",
                 "2016-09-15 21:00:02.066 2.62s"
         };
-//        System.out.println(solution(lines1));
+        System.out.println(solution(lines1));
         System.out.println(solution(lines2));
-//        System.out.println(solution(lines3));
+        System.out.println(solution(lines3));
     }
 
     public static int solution(String[] lines) throws ParseException {
@@ -55,36 +52,38 @@ public class ThanksgivingTraffic_kakao {
             startTimeArr[i] = startTime;
             endTimeArr[i] = endTime;
         }
-        // 배열 내 제일 작은 시간
-        long minTime = Arrays.stream(startTimeArr).min().getAsLong();
-        // 배열 내 제일 큰 시간
-        long maxTime = Arrays.stream(endTimeArr).max().getAsLong();
-        // 제일 큰시간 - 제일 작은시간 > 시차(초)를 구함
-        int diffTime = (int)Math.ceil((maxTime - minTime) / 1000.000f) + 1;
-        // 매 초를 비교하기 위해 시작시간
-        long compStartTime = minTime;
-        // 매 초를 비교하기 위해 종료시간(1초(1000밀리초)를 더한 값 저장 변수)
-        long compEndTime = minTime + 999L;
+
         // 구간 최대 처리량
         int max = 0;
 
-        // 매초 시간 비교
-        for(int i=0; i<=diffTime; i++){
-            // 처리량
-            int cnt = 0;
+        for(int i=0; i<size; i++){
+            int cnt = 0; // 최대 처리량
+            long startTimeRange = startTimeArr[i]; // 매초 시작시간 (로그 시작시간 기준)
+            long endTimeRange = startTimeRange + 999L; // 매초 종료시간
+            long startTimeRange2 = endTimeArr[i]; // 매초 시작시간 (로그 종료시간 기준)
+            long endTimeRange2 = startTimeRange2 + 999L; // 매초 종료시간
 
-            for(int j=0; j<size; j++){
-                if (betweenTime(compStartTime, compEndTime, startTimeArr[j], endTimeArr[j])) {
-                    System.out.println("포함");
-                    cnt++;
+            for(int j=i; j<size; j++){
+                long logStartTime = startTimeArr[j]; // 로그 시작시간
+                long logEndTime = endTimeArr[j]; // 로그 종료시간
+                // 겹처진 트래픽 구하기
+                // 초당 최대 처리량의 '1초'
+                // 1. 로그 시작시간을 기준으로 해서 + 1초로 범위를 잡음 ( 로그 시작시간 ~ 1초 )
+                // 2. 종료 시작시간을 기준으로 해서 + 1초로 범위를 잡음 ( 로그 종료시간 ~ 1초 )
+                // 3. 예제3의 5번째 로그막대바 처럼 1초 사이에 포함되어 있는 경우
+                if(
+                        (startTimeRange <= logStartTime && endTimeRange >= logStartTime) ||
+                        (startTimeRange2 <= logStartTime && endTimeRange2 >= logStartTime) ||
+                        (startTimeRange <= logEndTime && endTimeRange >= logEndTime) ||
+                        (startTimeRange2 <= logEndTime && endTimeRange2 >= logEndTime) ||
+                        betweenTime(startTimeRange, endTimeRange, logStartTime, logEndTime) ||
+                        betweenTime(startTimeRange2, endTimeRange2, logStartTime, logEndTime)
+                )
+                {
+                    cnt ++;
                 }
             }
-            System.out.println("END FOR DIFFTIME");
-            // 비교를 위해 1초(1000밀리초)씩 증가
-            compStartTime += 1000L;
-            compEndTime += 999L;
-            // 구간 최대 처리량 비교
-            max = Math.max(max, cnt);
+            max = Math.max(cnt, max);
         }
         return max;
     }
@@ -92,13 +91,6 @@ public class ThanksgivingTraffic_kakao {
     public static boolean betweenTime(long compStartTime, long compEndTime, long startTime, long endTime){
         boolean bStartTime;
         boolean bEndTime;
-
-        System.out.println("=============================================================");
-        System.out.println("비교 시작시간 :: " + sdf.format(compStartTime));
-        System.out.println("비교 종료시간 :: " + sdf.format(compEndTime));
-        System.out.println("시작시간 :: " + sdf.format(startTime));
-        System.out.println("종료시간 :: " + sdf.format(endTime));
-        System.out.println("=============================================================");
 
         // 시작시간 비교
         if(startTime >= compStartTime){
