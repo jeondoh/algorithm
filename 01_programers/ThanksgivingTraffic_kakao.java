@@ -68,12 +68,9 @@ public class ThanksgivingTraffic_kakao {
                 long logEndTime = endTimeArr[j]; // 로그 종료시간
                 // 겹처진 트래픽 구하기
                 // 초당 최대 처리량의 '1초'
-                // 1. 로그 시작시간을 기준으로 해서 + 1초로 범위를 잡음 ( 로그 시작시간 ~ 1초 )
-                // 2. 종료 시작시간을 기준으로 해서 + 1초로 범위를 잡음 ( 로그 종료시간 ~ 1초 )
-                // 3. 예제3의 5번째 로그막대바 처럼 1초 사이에 포함되어 있는 경우
+                // 1. 종료 시작시간을 기준으로 해서 + 1초로 범위를 잡음 ( 로그 종료시간 ~ 1초 )
+                // 2. 예제3의 5번째 로그막대바 처럼 1초 사이에 포함되어 있는 경우
                 if(
-                        (startTimeRange <= logStartTime && endTimeRange >= logStartTime) ||
-                        (startTimeRange2 <= logStartTime && endTimeRange2 >= logStartTime) ||
                         (startTimeRange <= logEndTime && endTimeRange >= logEndTime) ||
                         (startTimeRange2 <= logEndTime && endTimeRange2 >= logEndTime) ||
                         betweenTime(startTimeRange, endTimeRange, logStartTime, logEndTime) ||
