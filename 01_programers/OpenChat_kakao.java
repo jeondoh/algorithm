@@ -12,7 +12,7 @@ public class OpenChat_kakao {
 
     public static String[] solution(String[] record) {
         HashMap<String, String> dataMap = new HashMap<String, String>();
-        int arrSize = castToLinkedHashMap(record, dataMap);
+        int arrSize = castToHashMap(record, dataMap);
         String[] answer = new String[arrSize];
 
         int i = 0;
@@ -37,7 +37,7 @@ public class OpenChat_kakao {
         return answer;
     }
     // 배열 크기 반환
-    public static int castToLinkedHashMap(String[] record, HashMap<String, String> dataMap){
+    public static int castToHashMap(String[] record, HashMap<String, String> dataMap){
         int size = 0; // 배열 사이즈 반환
         for(String data : record){
             String[] sp = data.split(" ");
