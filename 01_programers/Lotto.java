@@ -17,19 +17,10 @@ public class Lotto {
         int[] answer = new int[2];
 
         HashSet<Integer> lottoSet = new HashSet<Integer>(); // 민우가 구매한 로또번호 목록
-        int lottoArrSize = lottos.length;
         // 알아볼수 없는 번호(0) 은 제외하고 Set
         for (int lotto : lottos) {
             if (lotto == 0) continue;
             lottoSet.add(lotto);
-        }
-
-        int setSize = lottoSet.size();
-        // 전부 알아볼수 없는 번호일 경우 ex) 0, 0, 0, 0, 0, 0
-        if(setSize == 0){
-            answer[0] = 1;
-            answer[1] = 6;
-            return answer;
         }
         // 맞는 번호 개수
         int correct = 0;
@@ -38,8 +29,7 @@ public class Lotto {
                 correct++;
             }
         }
-
-        answer[0] = Rank(correct + (6 - setSize));
+        answer[0] = Rank(correct + (6 - lottoSet.size()));
         answer[1] = Rank(correct);
         return answer;
     }
