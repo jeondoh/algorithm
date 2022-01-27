@@ -2,3 +2,6 @@ algorithm.iml
 /out/
 /.idea/
 .vscode
+
+# 테스트파일
+/02_baekjoon/test.txt
